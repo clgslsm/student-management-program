@@ -12,6 +12,7 @@ private:
     int score;
 public:
     // Constructor
+    Student();
     Student(string n, int s);
     // Getter for name
     string getName() const;
@@ -25,10 +26,7 @@ public:
 
 class StudentManagement {
 private:
-    vector<Student> students;
-    // 1 list for students' names & 1 list for student' scores.
-    int* scoreList;
-    string* nameList;
+    Student* studentsList; // Dynamic array of students
     int size;
 
 public:

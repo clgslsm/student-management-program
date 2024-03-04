@@ -2,6 +2,7 @@
     "files.associations": {
         "MLTable": "yaml",
         "typeinfo": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "xstring": "cpp"
     }
 }

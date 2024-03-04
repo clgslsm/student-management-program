@@ -3,6 +3,7 @@
 
 using namespace std;
 // Constructor
+Student::Student() : name(""), score(0) {}
 Student::Student(string n, int s) : name(n), score(s) {}
 
 // Getter for name
@@ -27,84 +28,66 @@ int Student::getScore() const {
 // Constructor
 StudentManagement::StudentManagement() {
     size = 0;
-    scoreList = nullptr;
-    nameList = nullptr;
+    studentsList = nullptr;
 }
 // Destructor
 StudentManagement::~StudentManagement() {
-    delete[] scoreList;
-    delete[] nameList;
+    delete [] studentsList;
 }
 // Function to add a new student
 void StudentManagement::addStudent(string name, int score) {
-    students.push_back(Student(name, score));
-    size++;
-    int* newScoreList = new int[size];
-    string* newNameList = new string[size];
-    for (int i = 0; i < size - 1; i++) {
-        newScoreList[i] = scoreList[i];
-        newNameList[i] = nameList[i];
+    Student newStudent(name, score);
+    // Add mewStudent to the dynamic array
+    Student* newStudentsList = new Student[size + 1];
+    for (int i = 0; i < size; i++) {
+        newStudentsList[i] = studentsList[i];
     }
-    newScoreList[size - 1] = score;
-    newNameList[size - 1] = name;
-    delete[] scoreList;
-    delete[] nameList;
-    scoreList = newScoreList;
-    nameList = newNameList;
+    newStudentsList[size] = newStudent;
+    delete [] studentsList;
+    studentsList = newStudentsList;
+    size++;
 }
 
 // Function to display the list of all students
 void StudentManagement::displayStudents() const {
     for (int i = 0; i < size; i++) {
-        cout << "Name: " << nameList[i] << ", Score: " << scoreList[i] << endl;
+        cout << "Name: " << studentsList[i].getName() << ", Score: " << studentsList[i].getScore() << endl;
     }
 }
 // Function to display the best students
 void StudentManagement::displayBestStudents() const {
-    int max = scoreList[0];
+    int max = studentsList[0].getScore();
     for (int i = 1; i < size; i++) {
-        if (scoreList[i] > max) {
-            max = scoreList[i];
+        if (studentsList[i].getScore() > max) {
+            max = studentsList[i].getScore();
         }
     }
     cout << "The best students are: " << endl;
     for (int i = 0; i < size; i++) {
-        if (scoreList[i] == max) {
-            cout << "Name: " << nameList[i] << ", Score: " << scoreList[i] << endl;
+        if (studentsList[i].getScore() == max) {
+            cout << "Name: " << studentsList[i].getName() << ", Score: " << studentsList[i].getScore() << endl;
         }
     }
 }
 
 // Function to remove a student by name. If the name is not found, inform the message to the user.
 void StudentManagement::removeStudent(string name) {
-    for (auto it = students.begin(); it != students.end(); ) {
-        if (it->getName() == name) {
-            it = students.erase(it);
-        } else {
-            ++it;
-        }
-    }
-    for (int i = 0; i < size; i++) {
-        if (nameList[i] == name) {
+    int i = 0;
+    bool find = false;
+    while (i < size) {
+        if (studentsList[i].getName() == name) {
             for (int j = i; j < size - 1; j++) {
-                scoreList[j] = scoreList[j + 1];
-                nameList[j] = nameList[j + 1];
+                studentsList[j] = studentsList[j + 1];
             }
             size--;
-            int* newScoreList = new int[size];
-            string* newNameList = new string[size];
-            for (int i = 0; i < size; i++) {
-                newScoreList[i] = scoreList[i];
-                newNameList[i] = nameList[i];
-            }
-            delete[] scoreList;
-            delete[] nameList;
-            scoreList = newScoreList;
-            nameList = newNameList;
-            return;
+            i = 0;
+            find = true;
         }
+        else
+            i++;
     }
-    cout << "Student " << name << " not found." << endl;
+    if (!find)
+        cout << "Student " << name << " not found." << endl;
 }
 
 // Funnction menu

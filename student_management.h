@@ -49,4 +49,18 @@ public:
     void menu();
 };
 
+class University {
+private:
+    Student* studentsList; // Dynamic array of students
+    string name;
+    int size;
+public:
+    University();
+    University(string n);
+    void addStudent(string name, int score);
+    void displayStudents() const;
+    void removeStudent(string name);
+    void displayBestStudents() const;
+    void menu();
+};
 #endif // STUDENT_MANAGEMENT_H

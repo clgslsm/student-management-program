@@ -6,61 +6,100 @@ using namespace std;
 #include <string>
 #include <iostream>
 #include <limits> // For cin.ignore() and cin.clear() solving the string with space issue
+
+enum typeOfStudent {
+    COLLEGE,
+    UNIVERSITY
+};
 class Student {
 private:
     string name;
     int score;
+    string dateOfBirth;
+    string schoolName;
+    string courseNames;
+protected:
+    int numOfGrade[3];
+    int numOfSemester;
+    string type;
 public:
     // Constructor
-    Student();
-    Student(string n, int s);
+    Student(string n = "", int s = 0, string dob = "", string school = "", string courses = "");
     // Getter for name
-    string getName() const;
+    string getName() const { return name; };
     //Setter for name
-    void setName(string n);
+    void setName(string n) { name = n;}
     // Getter for score
-    int getScore() const;
+    int getScore() const { return score; };
     // Setter for score
-    void setScore(int s);
+    void setScore(int s) { score = s; };
+    // Getter for date of birth
+    string getDateOfBirth() const { return dateOfBirth; };
+    // Setter for date of birth
+    void setDateOfBirth(string dob) { dateOfBirth = dob; };
+    // Getter for school name
+    string getSchoolName() const { return schoolName; };
+    // Setter for school name
+    void setSchoolName(string school) { schoolName = school; };
+    // Getter for course names
+    string getCourseNames() const { return courseNames; };
+    // Setter for course names
+    void setCourseNames(string courses) { courseNames = courses; };
+    // Abstract function to get type of student
+    string getType() { return type; };
 };
 
-class StudentManagement {
-private:
-    Student* studentsList; // Dynamic array of students
-    int size;
-
+class UniStudent : public Student {
 public:
-    // Constructor
-    StudentManagement();
-    // Destructor
-    ~StudentManagement();
-    // Function to add a new student
-    void addStudent(string name, int score);
+    UniStudent() : Student() {
+        numOfGrade[0] = 3;
+        numOfGrade[1] = 2;
+        numOfGrade[2] = 1;
+        numOfSemester = 8;
+        type = "University";
+    }
 
-    // Function to display the list of all students
-    void displayStudents() const; // Read-Only Operation
-
-    // Funnction to remove a student by name. If the name is not found, inform the message to the user.
-    void removeStudent(string name);
-
-    void displayBestStudents() const;
-
-    // Function to create a text-based menu that allow choose the the above functions or exit the program.
-    void menu();
+    UniStudent(string n, int s, string dob, string school, string courses) : Student(n, s, dob, school, courses) {
+        numOfGrade[0] = 3;
+        numOfGrade[1] = 2;
+        numOfGrade[2] = 1;
+        numOfSemester = 8;
+        type = "University";
+    }
 };
 
-class University {
+class CollegeStudent : public Student {
+public:
+    CollegeStudent() : Student() {
+        numOfGrade[0] = 1;
+        numOfGrade[1] = 1;
+        numOfGrade[2] = 1;
+        numOfSemester = 4;
+        type = "College";
+    }
+
+    CollegeStudent(string n, int s, string dob, string school, string courses) : Student(n, s, dob, school, courses) {
+        numOfGrade[0] = 1;
+        numOfGrade[1] = 1;
+        numOfGrade[2] = 1;
+        numOfSemester = 4;
+        type = "College";
+    }
+};
+class University
+{
 private:
-    Student* studentsList; // Dynamic array of students
+    Student** studentsList;
     string name;
     int size;
+
 public:
     University();
     University(string n);
-    void addStudent(string name, int score);
-    void displayStudents() const;
+    void addStudent(string name, int score, string dob, string school, string courses, typeOfStudent type);
+    void displayStudents();
     void removeStudent(string name);
-    void displayBestStudents() const;
+    void displayBestStudents();
     void menu();
 };
 #endif // STUDENT_MANAGEMENT_H

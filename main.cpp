@@ -3,12 +3,13 @@
 int main() {
     string MyUniversityName = "HCMUT";
     University MyUniversity(MyUniversityName);
-    MyUniversity.addStudent("John Doe", 90);
-    MyUniversity.addStudent("Jane Doe", 80);
-    MyUniversity.addStudent("Alice Smith", 85);
-    MyUniversity.addStudent("Taylor Swift", 100);
-    MyUniversity.addStudent("Tom Hanks", 100); // Trigger the displayBestStudents() function
-    MyUniversity.addStudent("Elon Musk", 100);
+    // Adding students
+    cout << "Test addStudent() function\n";
+    MyUniversity.addStudent("John Doe", 95, "01/01/2000", "High School", "Math, Physics, Chemistry", COLLEGE);
+    MyUniversity.addStudent("Alice Smith", 85, "01/01/2000", "High School", "Math, Physics, Chemistry", UNIVERSITY);
+    MyUniversity.addStudent("Jane Doe", 95, "01/01/2000", "High School", "Math, Physics, Chemistry", UNIVERSITY);
+    MyUniversity.addStudent("Bob Smith", 80, "01/01/2000", "High School", "Math, Physics, Chemistry", COLLEGE);
+    MyUniversity.addStudent("Tom Brown", 95, "01/01/2000", "High School", "Math, Physics, Chemistry", UNIVERSITY);
     // Displaying the list of all students
     cout << "Test displayStudents() function\n";
     MyUniversity.displayStudents();

@@ -5,11 +5,10 @@ int main() {
     University MyUniversity(MyUniversityName);
     // Adding students
     cout << "Test addStudent() function\n";
-    MyUniversity.addStudent("John Doe", 95, "01/01/2000", "High School", "Math, Physics, Chemistry", COLLEGE);
-    MyUniversity.addStudent("Alice Smith", 85, "01/01/2000", "High School", "Math, Physics, Chemistry", UNIVERSITY);
-    MyUniversity.addStudent("Jane Doe", 95, "01/01/2000", "High School", "Math, Physics, Chemistry", UNIVERSITY);
-    MyUniversity.addStudent("Bob Smith", 80, "01/01/2000", "High School", "Math, Physics, Chemistry", COLLEGE);
-    MyUniversity.addStudent("Tom Brown", 95, "01/01/2000", "High School", "Math, Physics, Chemistry", UNIVERSITY);
+    MyUniversity.addStudent("John Doe", "01/01/2000", "High School", "Math, Physics, Chemistry", COLLEGE);
+    MyUniversity.addStudent("Alice Smith", "01/01/2000", "High School", "Math, Physics, Chemistry", UNIVERSITY);
+    MyUniversity.addStudent("Jane Doe", "01/01/2000", "High School", "Math, Physics, Chemistry", UNIVERSITY);
+    MyUniversity.randomScore();
     // Displaying the list of all students
     cout << "Test displayStudents() function\n";
     MyUniversity.displayStudents();

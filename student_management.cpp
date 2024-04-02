@@ -3,8 +3,8 @@
 
 using namespace std;
 // Constructor
-Student::Student(std::string n, int s, std::string dob, std::string school, std::string courses)
-    : name(n), score(s), dateOfBirth(dob), schoolName(school), courseNames(courses) {};
+Student::Student(std::string n, std::string dob, std::string school, std::string courses)
+    : name(n), dateOfBirth(dob), schoolName(school), courseNames(courses) {};
 
 // Constructor
 University::University() {
@@ -18,16 +18,14 @@ University::University(std::string n) : name(n) {
 }
 
 // Function to add a new student
-
-// Corrected addStudent() function
-void University::addStudent(string name, int score, string dob, string school, string courses, typeOfStudent type) {
+void University::addStudent(string name, string dob, string school, string courses, typeOfStudent type) {
     Student* newStudent; // Declare a pointer to Student
 
     if (type == COLLEGE) {
-        newStudent = new CollegeStudent(name, score, dob, school, courses); // Create CollegeStudent object
+        newStudent = new CollegeStudent(name, dob, school, courses); // Create CollegeStudent object
     }
     else {
-        newStudent = new UniStudent(name, score, dob, school, courses); // Create UniStudent object
+        newStudent = new UniStudent(name, dob, school, courses); // Create UniStudent object
     }
 
     // Add newStudent to the dynamic array
@@ -44,12 +42,7 @@ void University::addStudent(string name, int score, string dob, string school, s
 // Corrected displayStudents() function
 void University::displayStudents() {
     for (int i = 0; i < size; i++) {
-        cout << "Name: " << studentsList[i]->getName() << ", "
-             << "Score: " << studentsList[i]->getScore() << ", "
-             << "Date of Birth: " << studentsList[i]->getDateOfBirth() << ", "
-             << "School Name: " << studentsList[i]->getSchoolName() << ", "
-             << "Course Names: " << studentsList[i]->getCourseNames() << ", "
-             << "Type: " << studentsList[i]->getType() << endl;
+        studentsList[i]->displayInfo();
     }
 }
 
@@ -88,7 +81,7 @@ void University::removeStudent(string name) {
             i++;
     }
     if (!find)
-        cout << "Student " << name << " not found->" << endl;
+        cout << "Student " << name << " not found" << endl;
 }
 
 // Funnction menu
@@ -129,7 +122,7 @@ void University::menu() {
                 cout << "Enter student type (0 for College, 1 for University): ";
                 cin >> type;
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                addStudent(name, score, dob, school, courses, typeOfStudent(type));
+                addStudent(name, dob, school, courses, typeOfStudent(type));
                 break;
             case 2:
                 displayStudents();
